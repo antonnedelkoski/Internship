@@ -1,0 +1,12 @@
+C:\Users\Anton\source\repos\Airports\Airports\bin\Debug\Airports.exe.config
+C:\Users\Anton\source\repos\Airports\Airports\bin\Debug\Airports.exe
+C:\Users\Anton\source\repos\Airports\Airports\bin\Debug\Airports.pdb
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.csproj.AssemblyReference.cache
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.AddDestination.resources
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.Form1.resources
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.NewAirport.resources
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.Properties.Resources.resources
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.csproj.GenerateResource.cache
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.csproj.CoreCompileInputs.cache
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.exe
+C:\Users\Anton\source\repos\Airports\Airports\obj\Debug\Airports.pdb
