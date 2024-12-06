@@ -1,0 +1,11 @@
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\bin\Debug\Kladilnica.exe.config
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\bin\Debug\Kladilnica.exe
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\bin\Debug\Kladilnica.pdb
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.csproj.AssemblyReference.cache
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.Form1.resources
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.Properties.Resources.resources
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.csproj.GenerateResource.cache
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.csproj.CoreCompileInputs.cache
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.exe
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.pdb
+C:\Users\Anton\source\repos\Kladilnica\Kladilnica\obj\Debug\Kladilnica.AddTeam.resources
