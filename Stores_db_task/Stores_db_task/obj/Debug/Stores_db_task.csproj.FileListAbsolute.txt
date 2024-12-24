@@ -1,0 +1,13 @@
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\bin\Debug\lastTry.mdf
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\bin\Debug\lastTry_log.ldf
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\bin\Debug\Stores_db_task.exe.config
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\bin\Debug\Stores_db_task.exe
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\bin\Debug\Stores_db_task.pdb
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.csproj.AssemblyReference.cache
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.Form1.resources
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.Properties.Resources.resources
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.csproj.GenerateResource.cache
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.csproj.CoreCompileInputs.cache
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.exe
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.pdb
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.selectArtikl.resources
