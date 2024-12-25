@@ -13,89 +13,81 @@ namespace Stores_db_task
 {
     public partial class selectArtikl : Form
     {
-        
         public int market;
-        public int shifra;
+        public string shifra; 
 
         public selectArtikl(int marketId)
         {
             this.market = marketId;
+            this.shifra = ""; 
             InitializeComponent();
         }
 
         public selectArtikl(int marketId, int shifraId)
         {
             this.market = marketId;
-            this.shifra = shifraId;
+            this.shifra = shifraId > 0 ? shifraId.ToString() : ""; 
             InitializeComponent();
         }
 
         private void selectArtikl_Load(object sender, EventArgs e)
         {
-            LoadArtikli();
-            
+            LoadArtikli(shifra);
         }
-        private void LoadArtikli()
+
+        private void LoadArtikli(string shifra)
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
 
-            string loadEnterQuery = "SELECT a.shifra, a.ime_artikl " +
-                            "FROM Produkti_vo_Market pm " +
-                            "JOIN Artikl a ON pm.artikl = a.id_artikl " +
+            string findMatchingArtikli = "SELECT a.shifra, a.ime_artikl " +
+                            "FROM Artikl a " +
+                            "JOIN Produkti_vo_Market pm ON a.id_artikl = pm.artikl " +
                             "JOIN Prodavnica p ON pm.prodavnica = p.id_prodavnica " +
-                            "WHERE @market = p.id_prodavnica ";
-                                //        +
-                            //"AND a.shifra LIKE @shifra ";
+                            "WHERE p.id_prodavnica = @market ";
 
+            if (!string.IsNullOrEmpty(shifra)){
 
-                           
+                findMatchingArtikli += "AND a.shifra LIKE @shifra";
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                
-                SqlCommand command = new SqlCommand(loadEnterQuery, connection);
-
+                SqlCommand command = new SqlCommand(findMatchingArtikli, connection);
                 command.Parameters.AddWithValue("@market", market);
-                command.Parameters.AddWithValue("@shifra", "%" + shifra + "%");
+
+                if (!string.IsNullOrEmpty(shifra)) {
+                    command.Parameters.AddWithValue("@shifra", "%" + shifra + "%");
+                }
 
                 connection.Open();
-
                 SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read()){
+                while (reader.Read()) {
                     lbArtikli.Items.Add(reader.GetInt32(0) + " | " + reader.GetString(1));
                 }
-                
-               
             }
         }
 
         private void lbArtikli_DoubleClick(object sender, EventArgs e)
         {
-            if(lbArtikli.SelectedItem != null){
+            if (lbArtikli.SelectedItem != null) {
                 string sentence = lbArtikli.SelectedItem.ToString();
-                char[] charsToTrim = { '|'};
-                string[] words = sentence.Split();
-                foreach (string word in words){
-                    word.TrimEnd(charsToTrim);
-                }
-                this.shifra = Convert.ToInt32(words[0].TrimEnd(charsToTrim));
-             }
+                string[] words = sentence.Split('|');
+                this.shifra = words[0].Trim();
+            }
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void lbArtikli_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Convert.ToInt32(e.KeyChar) == 13 && lbArtikli.SelectedItem != null){
+            if (Convert.ToInt32(e.KeyChar) == 13 && lbArtikli.SelectedItem != null) {
                 string sentence = lbArtikli.SelectedItem.ToString();
-                char[] charsToTrim = { '|' };
-                string[] words = sentence.Split();
-
-                foreach (string word in words){
-                    word.TrimEnd(charsToTrim);
-                }
-                this.shifra = Convert.ToInt32(words[0].TrimEnd(charsToTrim));
-            } else if (Convert.ToInt32(e.KeyChar) == 27){
+                string[] words = sentence.Split('|');
+                this.shifra = words[0].Trim();
+            }
+            else if (Convert.ToInt32(e.KeyChar) == 27) {
                 this.DialogResult = DialogResult.Cancel;
                 return;
             }
@@ -103,15 +95,5 @@ namespace Stores_db_task
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
-        private void lbArtikli_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        
     }
 }
-
-

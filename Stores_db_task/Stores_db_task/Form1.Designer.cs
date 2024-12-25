@@ -114,7 +114,7 @@
             this.dataGridTest.Name = "dataGridTest";
             this.dataGridTest.RowTemplate.Height = 24;
             this.dataGridTest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_CellDoubleClick);
-            this.dataGridTest.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_CellEndEdit);
+
             this.dataGridTest.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_CellValueChanged);
             this.dataGridTest.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_RowEnter);
             this.dataGridTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridTest_KeyPress);
