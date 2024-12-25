@@ -14,12 +14,14 @@ namespace Stores_db_task
     public partial class selectArtikl : Form
     {
         public int market;
-        public string shifra; 
+        public string shifra;
+        public string artikl;
 
         public selectArtikl(int marketId)
         {
             this.market = marketId;
-            this.shifra = ""; 
+            this.shifra = "";
+            this.artikl = "";
             InitializeComponent();
         }
 
@@ -29,6 +31,13 @@ namespace Stores_db_task
             this.shifra = shifraId > 0 ? shifraId.ToString() : ""; 
             InitializeComponent();
         }
+        public selectArtikl(int marketId, string articleName)
+        {
+            this.market = marketId;
+            this.artikl = articleName;
+            InitializeComponent();
+        }
+
 
         private void selectArtikl_Load(object sender, EventArgs e)
         {
@@ -45,9 +54,14 @@ namespace Stores_db_task
                             "JOIN Prodavnica p ON pm.prodavnica = p.id_prodavnica " +
                             "WHERE p.id_prodavnica = @market ";
 
-            if (!string.IsNullOrEmpty(shifra)){
+            if (!string.IsNullOrEmpty(shifra)) {
 
                 findMatchingArtikli += "AND a.shifra LIKE @shifra";
+            }
+            
+            if (!string.IsNullOrEmpty(artikl)) {
+
+                findMatchingArtikli += "AND a.ime_artikl LIKE @artikl";
             }
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -57,6 +71,10 @@ namespace Stores_db_task
 
                 if (!string.IsNullOrEmpty(shifra)) {
                     command.Parameters.AddWithValue("@shifra", "%" + shifra + "%");
+                }
+
+                if (!string.IsNullOrEmpty(artikl)) {
+                    command.Parameters.AddWithValue("@artikl", "%" + artikl + "%");
                 }
 
                 connection.Open();
@@ -74,6 +92,7 @@ namespace Stores_db_task
                 string sentence = lbArtikli.SelectedItem.ToString();
                 string[] words = sentence.Split('|');
                 this.shifra = words[0].Trim();
+                this.artikl = words[1].Trim();
             }
 
             this.DialogResult = DialogResult.OK;
@@ -86,8 +105,8 @@ namespace Stores_db_task
                 string sentence = lbArtikli.SelectedItem.ToString();
                 string[] words = sentence.Split('|');
                 this.shifra = words[0].Trim();
-            }
-            else if (Convert.ToInt32(e.KeyChar) == 27) {
+                this.artikl = words[1].Trim();
+            } else if (Convert.ToInt32(e.KeyChar) == 27) {
                 this.DialogResult = DialogResult.Cancel;
                 return;
             }

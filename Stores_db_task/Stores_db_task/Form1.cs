@@ -23,18 +23,19 @@ namespace Stores_db_task
             tbPrice.ReadOnly = true;
             dataGridTest.Enabled = false;
             dataGridTest.Columns["price"].ReadOnly = true;
-            dataGridTest.Columns["articleName"].ReadOnly = true;
+            
             tbPopust.Text = "0";
         }
 
         private void dataGridTest_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
+        {    //PREBARUVANJA I ZEMANJA NA SHIFRI
             if (e.ColumnIndex == 0 && e.RowIndex >= 0) {
                 int rowIndex = e.RowIndex;
                 string shifra = dataGridTest.Rows[rowIndex].Cells["Shifra"].Value?.ToString();
                 int prodavnica = Convert.ToInt32(tbMarket.Text);
+                string artikl = dataGridTest.Rows[rowIndex].Cells["articleName"].Value?.ToString();
 
-                if (!string.IsNullOrEmpty(shifra)) {
+                if (!string.IsNullOrEmpty(shifra) && string.IsNullOrEmpty(artikl)) {
 
                     if (shifra.Length < 4) {
 
@@ -108,6 +109,106 @@ namespace Stores_db_task
                             } else {
                                 MessageBox.Show("Не постои артиклот");
                                 dataGridTest.Rows[rowIndex].Cells["Shifra"].Value = "";
+                            }
+                        }
+                    }
+                }
+            } //PREBARUVANJA I ZEMANJA NA ARTIKLI
+            else if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+
+                int rowIndex = e.RowIndex;
+                string artikl = dataGridTest.Rows[rowIndex].Cells["articleName"].Value?.ToString();
+                string shifra = dataGridTest.Rows[rowIndex].Cells["Shifra"].Value?.ToString();
+                int prodavnica = Convert.ToInt32(tbMarket.Text);
+                int testLength = artikl.Length - 1;
+                if (!string.IsNullOrEmpty(artikl) && string.IsNullOrEmpty(shifra))
+                {
+
+                    if (artikl.Length <= 7)
+                    {
+
+                        selectArtikl searchForm = new selectArtikl(prodavnica, artikl);
+                        if (searchForm.ShowDialog() == DialogResult.OK)
+                        {
+
+                            string selectedArtikl = Convert.ToString(searchForm.artikl);
+                            bool artiklExists = false;
+
+                            foreach (DataGridViewRow row in dataGridTest.Rows)
+                            {
+
+                                if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == selectedArtikl && row.Index != rowIndex)
+                                {
+
+                                    int currentQuantity = Convert.ToInt32(row.Cells["kolicina"].Value);
+                                    row.Cells["kolicina"].Value = currentQuantity + 1;
+                                    dataGridTest.Rows[rowIndex].Cells["articleName"].Value = "";
+                                    calculatePrice();
+                                    artiklExists = true;
+                                    break;
+                                }
+                            }
+
+                            if (!artiklExists)
+                            {
+                                dataGridTest.Rows[rowIndex].Cells["articleName"].Value = selectedArtikl;
+                                calculatePrice();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        foreach (DataGridViewRow row in dataGridTest.Rows)
+                        {
+
+                            if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == artikl && row.Index != rowIndex)
+                            {
+
+                                int currentQuantity = Convert.ToInt32(row.Cells["kolicina"].Value);
+                                row.Cells["kolicina"].Value = currentQuantity + 1;
+                                dataGridTest.Rows[rowIndex].Cells["articleName"].Value = "";
+                                calculatePrice();
+                                return;
+                            }
+                        }
+
+
+                        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
+
+                        string query = "SELECT shifra FROM Artikl " +
+                                       "JOIN Produkti_vo_Market ON Artikl.id_artikl = Produkti_vo_Market.artikl " +
+                                       "WHERE ime_artikl = @artikl ";
+
+                        string queryPrice = "SELECT cena_vo_market FROM Produkti_vo_Market " +
+                                            "JOIN Prodavnica ON Produkti_vo_Market.prodavnica = Prodavnica.id_prodavnica " +
+                                            "JOIN Artikl ON Produkti_vo_Market.artikl = Artikl.id_artikl " +
+                                            "WHERE id_prodavnica = @prodavnica AND Artikl.ime_artikl = @artikl";
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            SqlCommand priceCommand = new SqlCommand(queryPrice, connection);
+                            priceCommand.Parameters.AddWithValue("@prodavnica", prodavnica);
+                            priceCommand.Parameters.AddWithValue("@artikl", artikl);
+
+                            SqlCommand command = new SqlCommand(query, connection);
+                            command.Parameters.AddWithValue("@artikl", artikl);
+
+                            connection.Open();
+
+                            object result = command.ExecuteScalar();
+                            object result1 = priceCommand.ExecuteScalar();
+
+                            if (result != null && result1 != null)
+                            {
+                                dataGridTest.Rows[rowIndex].Cells["shifra"].Value = result.ToString();
+                                dataGridTest.Rows[rowIndex].Cells["price"].Value = result1.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Не постои артиклот");
+                                dataGridTest.Rows[rowIndex].Cells["articleName"].Value = "";
                             }
                         }
                     }
@@ -399,14 +500,32 @@ namespace Stores_db_task
         private void dataGridTest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex >= 0) {
-                try {
+                
+                try{
                     int rowIndex = e.RowIndex;
                     int marketId = Convert.ToInt32(tbMarket.Text);
 
                     selectArtikl lbShifri = new selectArtikl(marketId);
-                    if (lbShifri.ShowDialog() == DialogResult.OK) {
+                    if (lbShifri.ShowDialog() == DialogResult.OK){
+
                         string selectedShifra = Convert.ToString(lbShifri.shifra);
                         dataGridTest.Rows[rowIndex].Cells["Shifra"].Value = selectedShifra;
+                    }
+                } catch (Exception ex){
+                    MessageBox.Show($"Грешка: {ex.Message}");
+                }
+
+            } else if (e.ColumnIndex == 1 && e.RowIndex >= 0){
+               
+                try {
+                    int rowIndex = e.RowIndex;
+                    int marketId = Convert.ToInt32(tbMarket.Text);
+
+                    selectArtikl lbArtikli = new selectArtikl(marketId);
+                    if (lbArtikli.ShowDialog() == DialogResult.OK) {
+
+                        string selectedArtikl = Convert.ToString(lbArtikli.artikl);
+                        dataGridTest.Rows[rowIndex].Cells["articleName"].Value = selectedArtikl;
                     }
                 } catch (Exception ex) {
                     MessageBox.Show($"Грешка: {ex.Message}");
@@ -465,7 +584,6 @@ namespace Stores_db_task
                                     popust = Convert.ToDouble(row.Cells["popust"].Value);
                                     popust /= 100;
                                 } else {
-
                                 tbPopust.Enabled = true;
                                 }
 
@@ -480,8 +598,7 @@ namespace Stores_db_task
 
                 tbPrice.Text = Convert.ToInt32(suma).ToString(".00 денари");
 
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 MessageBox.Show($"Грешка: {ex.Message}");
             }
         }
