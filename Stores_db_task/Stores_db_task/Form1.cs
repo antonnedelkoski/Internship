@@ -7,7 +7,7 @@ namespace Stores_db_task
 {
     public partial class Form1 : Form
     {
-
+        
         double discount;
 
         public Form1()
@@ -23,7 +23,6 @@ namespace Stores_db_task
             tbPrice.ReadOnly = true;
             dataGridTest.Enabled = false;
             dataGridTest.Columns["price"].ReadOnly = true;
-            
             tbPopust.Text = "0";
         }
 
@@ -34,6 +33,7 @@ namespace Stores_db_task
                 string shifra = dataGridTest.Rows[rowIndex].Cells["Shifra"].Value?.ToString();
                 int prodavnica = Convert.ToInt32(tbMarket.Text);
                 string artikl = dataGridTest.Rows[rowIndex].Cells["articleName"].Value?.ToString();
+                
 
                 if (!string.IsNullOrEmpty(shifra) && string.IsNullOrEmpty(artikl)) {
 
@@ -114,32 +114,28 @@ namespace Stores_db_task
                     }
                 }
             } //PREBARUVANJA I ZEMANJA NA ARTIKLI
-            else if (e.ColumnIndex == 1 && e.RowIndex >= 0)
-            {
+            else if (e.ColumnIndex == 1 && e.RowIndex >= 0) {
 
                 int rowIndex = e.RowIndex;
                 string artikl = dataGridTest.Rows[rowIndex].Cells["articleName"].Value?.ToString();
                 string shifra = dataGridTest.Rows[rowIndex].Cells["Shifra"].Value?.ToString();
                 int prodavnica = Convert.ToInt32(tbMarket.Text);
-                int testLength = artikl.Length - 1;
-                if (!string.IsNullOrEmpty(artikl) && string.IsNullOrEmpty(shifra))
-                {
+                
+                
+                if (!string.IsNullOrEmpty(artikl) && string.IsNullOrEmpty(shifra)) {
 
-                    if (artikl.Length <= 7)
-                    {
+                    if (artikl.Length <= 7) {
 
                         selectArtikl searchForm = new selectArtikl(prodavnica, artikl);
-                        if (searchForm.ShowDialog() == DialogResult.OK)
-                        {
+
+                        if (searchForm.ShowDialog() == DialogResult.OK) {
 
                             string selectedArtikl = Convert.ToString(searchForm.artikl);
                             bool artiklExists = false;
 
-                            foreach (DataGridViewRow row in dataGridTest.Rows)
-                            {
+                            foreach (DataGridViewRow row in dataGridTest.Rows) {
 
-                                if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == selectedArtikl && row.Index != rowIndex)
-                                {
+                                if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == selectedArtikl && row.Index != rowIndex) {
 
                                     int currentQuantity = Convert.ToInt32(row.Cells["kolicina"].Value);
                                     row.Cells["kolicina"].Value = currentQuantity + 1;
@@ -150,21 +146,16 @@ namespace Stores_db_task
                                 }
                             }
 
-                            if (!artiklExists)
-                            {
+                            if (!artiklExists) {
                                 dataGridTest.Rows[rowIndex].Cells["articleName"].Value = selectedArtikl;
                                 calculatePrice();
                             }
 
                         }
-                    }
-                    else
-                    {
-                        foreach (DataGridViewRow row in dataGridTest.Rows)
-                        {
+                    } else {
+                        foreach (DataGridViewRow row in dataGridTest.Rows) {
 
-                            if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == artikl && row.Index != rowIndex)
-                            {
+                            if (row.Cells["articleName"].Value != null && row.Cells["articleName"].Value.ToString() == artikl && row.Index != rowIndex) {
 
                                 int currentQuantity = Convert.ToInt32(row.Cells["kolicina"].Value);
                                 row.Cells["kolicina"].Value = currentQuantity + 1;
@@ -200,13 +191,10 @@ namespace Stores_db_task
                             object result = command.ExecuteScalar();
                             object result1 = priceCommand.ExecuteScalar();
 
-                            if (result != null && result1 != null)
-                            {
+                            if (result != null && result1 != null) {
                                 dataGridTest.Rows[rowIndex].Cells["shifra"].Value = result.ToString();
                                 dataGridTest.Rows[rowIndex].Cells["price"].Value = result1.ToString();
-                            }
-                            else
-                            {
+                            } else {
                                 MessageBox.Show("Не постои артиклот");
                                 dataGridTest.Rows[rowIndex].Cells["articleName"].Value = "";
                             }
@@ -235,10 +223,21 @@ namespace Stores_db_task
 
 
             try {
+                int id_naplata = 0;
                 int kasierId = Convert.ToInt32(kasierTextBox.Text);
                 int marketId = Convert.ToInt32(tbMarket.Text);
                 int kasaId;
                 int smetkaPA;
+                
+                nacinPlakjanje test = new nacinPlakjanje(id_naplata);
+
+                if (test.ShowDialog() == DialogResult.OK) {
+                    id_naplata = test.vid_naplata;
+                    
+                } else {
+                    MessageBox.Show("Не е избран метод на наплта!");
+                    return;
+                }
 
                 DateTime currentDate = DateTime.Now;
                 string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
@@ -250,8 +249,8 @@ namespace Stores_db_task
                                     "WHERE @kasierId = rabotnik_id " +
                                     "AND @marketId = Prodavnica.id_prodavnica";
 
-                string insertProdazbaQuery = "INSERT INTO Prodazba (kasier_id, kasa_id, datum_prodazba, market_id,iznos) " +
-                                             "VALUES (@kasierId, @kasaId, @datum, @marketId, @iznos);SELECT SCOPE_IDENTITY();";
+                string insertProdazbaQuery = "INSERT INTO Prodazba (kasier_id, kasa_id, datum_prodazba, market_id,iznos, nacin_naplata) " +
+                                             "VALUES (@kasierId, @kasaId, @datum, @marketId, @iznos,@id_naplata);SELECT SCOPE_IDENTITY();";
 
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -268,8 +267,7 @@ namespace Stores_db_task
 
                     object kasaNaogjanje = kasaKveri.ExecuteScalar();
 
-                    if (kasaNaogjanje != null)
-                    {
+                    if (kasaNaogjanje != null) {
                         kasaId = Convert.ToInt32(kasaNaogjanje);
                         command.Parameters.AddWithValue("@kasaId", kasaId);
                     }
@@ -277,6 +275,8 @@ namespace Stores_db_task
                     command.Parameters.AddWithValue("@marketId", marketId);
                     command.Parameters.AddWithValue("@kasierId", kasierId);
                     command.Parameters.AddWithValue("@datum", currentDate);
+                    command.Parameters.AddWithValue("@id_naplata", id_naplata);
+                    
 
                     foreach (DataGridViewRow row in dataGridTest.Rows) {
 
@@ -340,18 +340,8 @@ namespace Stores_db_task
                             }
                         }
 
-                        MessageBox.Show("Сметката е внесена успешно.");
-                        dataGridTest.Rows.Clear();
-                        kasierTextBox.Text = string.Empty;
-                        tbPrice.Text = string.Empty;
-                        tbMarket.Text = string.Empty;
-                        kasierTextBox.Enabled = true;
-                        tbMarket.Enabled = true;
-                        labelKasier.Text = string.Empty;
-                        labelMarketName.Text = string.Empty;
-                        tbPopust.Enabled = true;
-                        tbPopust.Text = "0";
-                        discount = 0;
+                        MessageBox.Show($"Сметката е внесена успешно.\n Начин на плаќање: {id_naplata} ");
+                        afterInsertion();
 
                     } else {
                         MessageBox.Show("Неуспешно внесување");
@@ -428,6 +418,7 @@ namespace Stores_db_task
                             SqlDataReader pronajdiIme = vcitajMarket.ExecuteReader();
                             while (pronajdiIme.Read()) {
                                 labelMarketName.Text = pronajdiIme.GetValue(0).ToString();
+                                
                             }
                         }
                     }
@@ -440,8 +431,7 @@ namespace Stores_db_task
                 MessageBox.Show("Внеси касиер");
                 kasierTextBox.Enabled = true;
                 kasierTextBox.Focus();
-            }
-            else if (kasierTextBox.Text == "" && tbMarket.Text == "") {
+            } else if (kasierTextBox.Text == "" && tbMarket.Text == "") {
                 MessageBox.Show("Внеси прво маркет");
                 kasierTextBox.Enabled = true;
                 tbMarket.Focus();
@@ -501,7 +491,7 @@ namespace Stores_db_task
         {
             if (e.ColumnIndex == 0 && e.RowIndex >= 0) {
                 
-                try{
+                try {
                     int rowIndex = e.RowIndex;
                     int marketId = Convert.ToInt32(tbMarket.Text);
 
@@ -514,8 +504,9 @@ namespace Stores_db_task
                 } catch (Exception ex){
                     MessageBox.Show($"Грешка: {ex.Message}");
                 }
-
-            } else if (e.ColumnIndex == 1 && e.RowIndex >= 0){
+            }
+            
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0){
                
                 try {
                     int rowIndex = e.RowIndex;
@@ -541,8 +532,10 @@ namespace Stores_db_task
                     selectArtikl lbShifri = new selectArtikl(marketId);
 
                    if (lbShifri.ShowDialog() == DialogResult.OK) {
+
                         int rowIndex = dataGridTest.CurrentCell.RowIndex;
                         string selectedShifra = Convert.ToString(lbShifri.shifra);
+
                         dataGridTest.Rows[rowIndex].Cells["Shifra"].Value = selectedShifra;
                         calculatePrice();
                     }
@@ -562,6 +555,7 @@ namespace Stores_db_task
                     if (!row.IsNewRow && row.Cells["price"].Value != null && row.Cells["kolicina"].Value != null) {
 
                         if (Convert.ToInt32(tbPopust.Text) > 0) {
+
                             decimal cena = Convert.ToDecimal(row.Cells["price"].Value);
                             int kolicina = Convert.ToInt32(row.Cells["kolicina"].Value);
                             double kolCena = (double)(kolicina * cena);
@@ -584,13 +578,15 @@ namespace Stores_db_task
                                     popust = Convert.ToDouble(row.Cells["popust"].Value);
                                     popust /= 100;
                                 } else {
+
                                 tbPopust.Enabled = true;
+
                                 }
 
                                 double kolCena = (double)(kolicina * cena);
                                 double iznosPopust = kolCena * popust;
                                 kolCena -= iznosPopust;
-
+                            
                                 suma += kolCena;
                         }
                     }
@@ -613,6 +609,22 @@ namespace Stores_db_task
                 discount = discount / 100;
             }
         }
+
+        private void afterInsertion(){
+
+            dataGridTest.Rows.Clear();
+            kasierTextBox.Text = string.Empty;
+            tbPrice.Text = string.Empty;
+            tbMarket.Text = string.Empty;
+            kasierTextBox.Enabled = true;
+            tbMarket.Enabled = true;
+            labelKasier.Text = string.Empty;
+            labelMarketName.Text = string.Empty;
+            tbPopust.Enabled = true;
+            tbPopust.Text = "0";
+            discount = 0;
+        }
+
     }
 }
 

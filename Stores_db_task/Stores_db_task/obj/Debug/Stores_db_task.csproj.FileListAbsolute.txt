@@ -11,3 +11,4 @@ C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_ta
 C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.exe
 C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.pdb
 C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.selectArtikl.resources
+C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\obj\Debug\Stores_db_task.nacinPlakjanje.resources

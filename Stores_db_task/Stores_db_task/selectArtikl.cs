@@ -89,6 +89,7 @@ namespace Stores_db_task
         private void lbArtikli_DoubleClick(object sender, EventArgs e)
         {
             if (lbArtikli.SelectedItem != null) {
+
                 string sentence = lbArtikli.SelectedItem.ToString();
                 string[] words = sentence.Split('|');
                 this.shifra = words[0].Trim();

@@ -41,6 +41,11 @@
             this.tbPrice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridTest = new System.Windows.Forms.DataGridView();
+            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbMarket = new System.Windows.Forms.TextBox();
@@ -49,11 +54,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbPopust = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTest)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +100,7 @@
             this.dataGridTest.AllowDrop = true;
             this.dataGridTest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridTest.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridTest.BackgroundColor = System.Drawing.Color.Snow;
+            this.dataGridTest.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridTest.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dataGridTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridTest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -114,10 +114,52 @@
             this.dataGridTest.Name = "dataGridTest";
             this.dataGridTest.RowTemplate.Height = 24;
             this.dataGridTest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_CellDoubleClick);
-
             this.dataGridTest.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_CellValueChanged);
             this.dataGridTest.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_RowEnter);
             this.dataGridTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridTest_KeyPress);
+            // 
+            // shifra
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shifra.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.shifra, "shifra");
+            this.shifra.Name = "shifra";
+            // 
+            // articleName
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.articleName.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.articleName, "articleName");
+            this.articleName.Name = "articleName";
+            // 
+            // kolicina
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kolicina.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.kolicina, "kolicina");
+            this.kolicina.Name = "kolicina";
+            // 
+            // popust
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.popust.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.popust, "popust");
+            this.popust.Name = "popust";
+            // 
+            // price
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.price.DefaultCellStyle = dataGridViewCellStyle5;
+            resources.ApplyResources(this.price, "price");
+            this.price.Name = "price";
             // 
             // btnSave
             // 
@@ -176,48 +218,11 @@
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Name = "label6";
             // 
-            // shifra
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shifra.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.shifra, "shifra");
-            this.shifra.Name = "shifra";
-            // 
-            // articleName
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.articleName.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.articleName, "articleName");
-            this.articleName.Name = "articleName";
-            // 
-            // kolicina
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kolicina.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.kolicina, "kolicina");
-            this.kolicina.Name = "kolicina";
-            // 
-            // popust
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.popust.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.popust, "popust");
-            this.popust.Name = "popust";
-            // 
-            // price
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.price, "price");
-            this.price.Name = "price";
-            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbPopust);

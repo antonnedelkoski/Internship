@@ -67,6 +67,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="nacinPlakjanje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nacinPlakjanje.Designer.cs">
+      <DependentUpon>nacinPlakjanje.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="selectArtikl.cs">
@@ -77,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nacinPlakjanje.resx">
+      <DependentUpon>nacinPlakjanje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
