@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="lastTryDataSet" targetNamespace="http://tempuri.org/lastTryDataSet.xsd" xmlns:mstns="http://tempuri.org/lastTryDataSet.xsd" xmlns="http://tempuri.org/lastTryDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="lastTryConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="lastTryConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Stores_db_task.Properties.Settings.GlobalReference.Default.lastTryConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Nacin_NaplataTableAdapter" GeneratorDataComponentClassName="Nacin_NaplataTableAdapter" Name="Nacin_Naplata" UserDataComponentName="Nacin_NaplataTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="lastTryConnectionString (Settings)" DbObjectName="dbo.Nacin_Naplata" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT vid_naplata FROM dbo.Nacin_Naplata</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="vid_naplata" DataSetColumn="vid_naplata" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="lastTryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="lastTryDataSet" msprop:Generator_DataSetName="lastTryDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Nacin_Naplata" msprop:Generator_RowEvHandlerName="Nacin_NaplataRowChangeEventHandler" msprop:Generator_RowDeletedName="Nacin_NaplataRowDeleted" msprop:Generator_RowDeletingName="Nacin_NaplataRowDeleting" msprop:Generator_RowEvArgName="Nacin_NaplataRowChangeEvent" msprop:Generator_TablePropName="Nacin_Naplata" msprop:Generator_RowChangedName="Nacin_NaplataRowChanged" msprop:Generator_RowChangingName="Nacin_NaplataRowChanging" msprop:Generator_TableClassName="Nacin_NaplataDataTable" msprop:Generator_RowClassName="Nacin_NaplataRow" msprop:Generator_TableVarName="tableNacin_Naplata" msprop:Generator_UserTableName="Nacin_Naplata">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="vid_naplata" msprop:Generator_ColumnPropNameInRow="vid_naplata" msprop:Generator_ColumnPropNameInTable="vid_naplataColumn" msprop:Generator_ColumnVarNameInTable="columnvid_naplata" msprop:Generator_UserColumnName="vid_naplata" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

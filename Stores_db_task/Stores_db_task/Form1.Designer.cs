@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.datumTextBox = new System.Windows.Forms.TextBox();
             this.kasierTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,11 +41,6 @@
             this.tbPrice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridTest = new System.Windows.Forms.DataGridView();
-            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbMarket = new System.Windows.Forms.TextBox();
@@ -54,6 +49,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbPopust = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTest)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,49 +118,6 @@
             this.dataGridTest.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_RowEnter);
             this.dataGridTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridTest_KeyPress);
             // 
-            // shifra
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shifra.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.shifra, "shifra");
-            this.shifra.Name = "shifra";
-            // 
-            // articleName
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.articleName.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.articleName, "articleName");
-            this.articleName.Name = "articleName";
-            // 
-            // kolicina
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kolicina.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.kolicina, "kolicina");
-            this.kolicina.Name = "kolicina";
-            // 
-            // popust
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.popust.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.popust, "popust");
-            this.popust.Name = "popust";
-            // 
-            // price
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.price, "price");
-            this.price.Name = "price";
-            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.Lime;
@@ -188,14 +145,14 @@
             // 
             resources.ApplyResources(this.labelMarketName, "labelMarketName");
             this.labelMarketName.BackColor = System.Drawing.SystemColors.Control;
-            this.labelMarketName.ForeColor = System.Drawing.Color.Green;
+            this.labelMarketName.ForeColor = System.Drawing.Color.Black;
             this.labelMarketName.Name = "labelMarketName";
             // 
             // labelKasier
             // 
             resources.ApplyResources(this.labelKasier, "labelKasier");
             this.labelKasier.BackColor = System.Drawing.SystemColors.Control;
-            this.labelKasier.ForeColor = System.Drawing.Color.Green;
+            this.labelKasier.ForeColor = System.Drawing.Color.Black;
             this.labelKasier.Name = "labelKasier";
             // 
             // label5
@@ -217,6 +174,49 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Name = "label6";
+            // 
+            // shifra
+            // 
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.shifra.DefaultCellStyle = dataGridViewCellStyle16;
+            resources.ApplyResources(this.shifra, "shifra");
+            this.shifra.Name = "shifra";
+            // 
+            // articleName
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.articleName.DefaultCellStyle = dataGridViewCellStyle17;
+            resources.ApplyResources(this.articleName, "articleName");
+            this.articleName.Name = "articleName";
+            // 
+            // kolicina
+            // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.kolicina.DefaultCellStyle = dataGridViewCellStyle18;
+            resources.ApplyResources(this.kolicina, "kolicina");
+            this.kolicina.Name = "kolicina";
+            // 
+            // popust
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Italic);
+            this.popust.DefaultCellStyle = dataGridViewCellStyle19;
+            resources.ApplyResources(this.popust, "popust");
+            this.popust.Name = "popust";
+            // 
+            // price
+            // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.price.DefaultCellStyle = dataGridViewCellStyle20;
+            resources.ApplyResources(this.price, "price");
+            this.price.Name = "price";
             // 
             // Form1
             // 

@@ -228,16 +228,8 @@ namespace Stores_db_task
                 int marketId = Convert.ToInt32(tbMarket.Text);
                 int kasaId;
                 int smetkaPA;
-                
-                nacinPlakjanje test = new nacinPlakjanje(id_naplata);
+                int smetkaPP;
 
-                if (test.ShowDialog() == DialogResult.OK) {
-                    id_naplata = test.vid_naplata;
-                    
-                } else {
-                    MessageBox.Show("Не е избран метод на наплта!");
-                    return;
-                }
 
                 DateTime currentDate = DateTime.Now;
                 string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
@@ -249,8 +241,8 @@ namespace Stores_db_task
                                     "WHERE @kasierId = rabotnik_id " +
                                     "AND @marketId = Prodavnica.id_prodavnica";
 
-                string insertProdazbaQuery = "INSERT INTO Prodazba (kasier_id, kasa_id, datum_prodazba, market_id,iznos, nacin_naplata) " +
-                                             "VALUES (@kasierId, @kasaId, @datum, @marketId, @iznos,@id_naplata);SELECT SCOPE_IDENTITY();";
+                string insertProdazbaQuery = "INSERT INTO Prodazba (kasier_id, kasa_id, datum_prodazba, market_id,iznos) " +
+                                             "VALUES (@kasierId, @kasaId, @datum, @marketId, @iznos);SELECT SCOPE_IDENTITY();";
 
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -299,6 +291,7 @@ namespace Stores_db_task
                     if (result != null) {
                         int smetkaId = Convert.ToInt32(result);
                         smetkaPA = smetkaId;
+                        smetkaPP = smetkaId;
 
                         foreach (DataGridViewRow row in dataGridTest.Rows) {
                             if (row.IsNewRow) continue;
@@ -339,8 +332,34 @@ namespace Stores_db_task
                                 MessageBox.Show($"Артикл со шифра {shifra} не постои.");
                             }
                         }
+                        //////////////////////////////PART PRICE
+                        double iznosPrikaz = 0;
 
-                        MessageBox.Show($"Сметката е внесена успешно.\n Начин на плаќање: {id_naplata} ");
+                        foreach (DataGridViewRow row in dataGridTest.Rows)
+                        {
+
+                            if (row.IsNewRow) continue;
+
+                            string shifra = row.Cells["Shifra"].Value.ToString();
+                            int kolicina = Convert.ToInt32(row.Cells["kolicina"].Value);
+                            decimal cena = Convert.ToDecimal(row.Cells["price"].Value);
+
+                            double popustStavka = Convert.ToDouble(row.Cells["popust"].Value);
+                            popustStavka /= 100;
+
+                            iznosPrikaz += (kolicina * (int)cena) - ((kolicina * (int)cena) * popustStavka);
+                        }
+
+                        nacinPlakjanje test = new nacinPlakjanje(iznosPrikaz,smetkaPP);
+
+                        if (test.ShowDialog() != DialogResult.OK)
+                        {
+                            MessageBox.Show("Не е избран метод на наплта!");
+                            return;
+                        }
+                        ///////////////////////////////////////////////////////////////////OVA MI E ZA PART SALE
+
+                        MessageBox.Show($"Сметката е внесена успешно!");
                         afterInsertion();
 
                     } else {
@@ -417,7 +436,7 @@ namespace Stores_db_task
                         } else {
                             SqlDataReader pronajdiIme = vcitajMarket.ExecuteReader();
                             while (pronajdiIme.Read()) {
-                                labelMarketName.Text = pronajdiIme.GetValue(0).ToString();
+                                labelMarketName.Text = pronajdiIme.GetValue(0).ToString().ToUpper();
                                 
                             }
                         }
@@ -477,7 +496,7 @@ namespace Stores_db_task
                         SqlDataReader pronajdiImePrezime = vcitajKasier.ExecuteReader();
 
                         while (pronajdiImePrezime.Read()) {
-                            labelKasier.Text = pronajdiImePrezime.GetValue(0).ToString() + " " + pronajdiImePrezime.GetValue(1).ToString();
+                            labelKasier.Text = pronajdiImePrezime.GetValue(0).ToString().ToUpper() + " " + pronajdiImePrezime.GetValue(1).ToString().ToUpper();
                             dataGridTest.Enabled = true;
                             dataGridTest.Focus();
                         }
@@ -527,7 +546,7 @@ namespace Stores_db_task
         private void dataGridTest_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Convert.ToInt32(e.KeyChar) == 13 || Convert.ToInt32(e.KeyChar) == 10){
-                try{
+                try {
                     int marketId = Convert.ToInt32(tbMarket.Text);
                     selectArtikl lbShifri = new selectArtikl(marketId);
 
@@ -565,6 +584,7 @@ namespace Stores_db_task
                             suma += kolCena;
 
                             row.Cells["popust"].Value = tbPopust.Text;
+
                         } else {
 
                                 tbPopust.Enabled = false;
@@ -592,7 +612,7 @@ namespace Stores_db_task
                     }
                 }
 
-                tbPrice.Text = Convert.ToInt32(suma).ToString(".00 денари");
+                tbPrice.Text = Convert.ToInt32(suma).ToString(".00 ден");
 
             } catch (Exception ex) {
                 MessageBox.Show($"Грешка: {ex.Message}");
@@ -624,6 +644,8 @@ namespace Stores_db_task
             tbPopust.Text = "0";
             discount = 0;
         }
+
+
 
     }
 }

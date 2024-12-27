@@ -14,68 +14,101 @@ namespace Stores_db_task
 {
     public partial class nacinPlakjanje : Form
     {
-        public int vid_naplata;
-        public nacinPlakjanje(int id_naplata)
+        public int smetkaId;
+        public double suma;
+
+        public nacinPlakjanje(double iznos, int smetkaId)
         {
-            this.vid_naplata = id_naplata;
+            this.suma = iznos;
+            this.smetkaId = smetkaId;
             InitializeComponent();
         }
 
         private void nacinPlakjanje_Load(object sender, EventArgs e)
         {
-            loadNaplati();
+            this.nacin_NaplataTableAdapter.Fill(this.lastTryDataSet.Nacin_Naplata);
+            tbDisplayPrice.ReadOnly = true;
+            tbDisplayPrice.Text = suma.ToString("");
+            dataGridPlakjanje.Focus();
         }
 
-        private void loadNaplati()
+        private void dataGridPlakjanje_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridPlakjanje.Columns["iznos"] != null && e.ColumnIndex == dataGridPlakjanje.Columns["iznos"].Index) {
+                presmetajOstatok();
+            }
+        }
+
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
 
-            string vidNaplataQuery = "SELECT vid_naplata FROM Nacin_Naplata";
-            
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(vidNaplataQuery, connection);
-
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read()) {
-                    lbNaplata.Items.Add(reader.GetString(0).ToUpper());
+                foreach (DataGridViewRow row in dataGridPlakjanje.Rows) {
+                    if (!row.IsNewRow && row.Cells["iznos"].Value != null) {
+                        
+                        
+                        if (double.TryParse(row.Cells["iznos"].Value.ToString(), out double iznos) && iznos > 0) {
+                            string nacinNaplata = row.Cells["vidnaplataDataGridViewTextBoxColumn"].Value.ToString();
+
+                            string getIdNaplata = "SELECT id_nacin FROM Nacin_Naplata WHERE vid_naplata = @nacinNaplata";
+                            SqlCommand getIdNaplataCommand = new SqlCommand(getIdNaplata, connection);
+                            getIdNaplataCommand.Parameters.AddWithValue("@nacinNaplata", nacinNaplata);
+
+                            object result = getIdNaplataCommand.ExecuteScalar();
+                            if (result == null) {
+                                MessageBox.Show("Не постои методот за наплата!");
+                                continue;
+                            }
+
+                            int nacinNaplataId = Convert.ToInt32(result);
+
+                            string insertPartPayment = "INSERT INTO Part_Payment (id_smetka, nacin_plakjanje_id, iznos) " +
+                                                       "VALUES (@smetkaId, @nacinNaplataId, @iznos)";
+                            SqlCommand insertPartPaymentCommand = new SqlCommand(insertPartPayment, connection);
+                            insertPartPaymentCommand.Parameters.AddWithValue("@smetkaId", smetkaId);
+                            insertPartPaymentCommand.Parameters.AddWithValue("@nacinNaplataId", nacinNaplataId);
+                            insertPartPaymentCommand.Parameters.AddWithValue("@iznos", iznos);
+
+                            insertPartPaymentCommand.ExecuteNonQuery();
+                        } else {
+                            MessageBox.Show("Невалидна вредност!");
+                        }
+                    } 
                 }
-            }
-        }
-
-        private void lbNaplata_DoubleClick(object sender, EventArgs e)
-        {
-            if (lbNaplata.SelectedItem != null) {
-                
-                this.vid_naplata = lbNaplata.SelectedIndex; 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-        }
-
-        private void lbNaplata_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Convert.ToInt32(e.KeyChar) == 13 && lbNaplata.SelectedItem != null) {
-                
-                this.vid_naplata = lbNaplata.SelectedIndex;
-
-            }
-            else if (Convert.ToInt32(e.KeyChar) == 27) {
-                
-                this.DialogResult = DialogResult.Cancel;
-                return;
             }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
-        private void lbNaplata_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void presmetajOstatok()
         {
+            double ostatok = suma;
 
+            foreach (DataGridViewRow row in dataGridPlakjanje.Rows) {
+
+                if (!row.IsNewRow && row.Cells["iznos"].Value != null) {
+
+                    if (double.TryParse(row.Cells["iznos"].Value.ToString(), out double platenIznos)) {
+                        if (ostatok - platenIznos < 0) {
+                            MessageBox.Show("Не може да се наплати таков износ!");
+                            return;
+                        }
+                        ostatok -= platenIznos;
+                    }
+                }
+            }
+
+            tbDisplayPrice.Text = ostatok.ToString("");
         }
     }
 }
+
+
+
+

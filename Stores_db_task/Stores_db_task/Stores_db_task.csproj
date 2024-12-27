@@ -67,6 +67,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="lastTryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lastTryDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="nacinPlakjanje.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +105,17 @@
     <EmbeddedResource Include="selectArtikl.resx">
       <DependentUpon>selectArtikl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="lastTryDataSet.xsc">
+      <DependentUpon>lastTryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="lastTryDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>lastTryDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="lastTryDataSet.xss">
+      <DependentUpon>lastTryDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
