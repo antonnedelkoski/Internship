@@ -162,9 +162,10 @@ namespace Stores_db_task
                                 dataGridTest.Rows[rowIndex].Cells["articleName"].Value = "";
                                 calculatePrice();
                                 return;
+
                             }
                         }
-
+                        //priprema izvestaj so period od do i totalen promet po artikli za kasier i market koj prodal i sho prodal od do!!!!!!!
 
                         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Anton\source\repos\Stores_db_task\Stores_db_task\lastTry.mdf;Integrated Security=True;Connect Timeout=30";
 
@@ -335,8 +336,7 @@ namespace Stores_db_task
                         //////////////////////////////PART PRICE
                         double iznosPrikaz = 0;
 
-                        foreach (DataGridViewRow row in dataGridTest.Rows)
-                        {
+                        foreach (DataGridViewRow row in dataGridTest.Rows){
 
                             if (row.IsNewRow) continue;
 
@@ -352,14 +352,15 @@ namespace Stores_db_task
 
                         nacinPlakjanje test = new nacinPlakjanje(iznosPrikaz,smetkaPP);
 
-                        if (test.ShowDialog() != DialogResult.OK)
-                        {
+                        if (test.ShowDialog() != DialogResult.OK) {
                             MessageBox.Show("Не е избран метод на наплта!");
                             return;
                         }
-                        ///////////////////////////////////////////////////////////////////OVA MI E ZA PART SALE
+                        
 
-                        MessageBox.Show($"Сметката е внесена успешно!");
+                            ///////////////////////////////////////////////////////////////////OVA MI E ZA PART SALE
+
+                            MessageBox.Show($"Сметката е внесена успешно!");
                         afterInsertion();
 
                     } else {
@@ -401,7 +402,7 @@ namespace Stores_db_task
         private void tbMarket_Validating(object sender, CancelEventArgs e)
         {
             if (tbMarket.Text == "") {
-                MessageBox.Show("Внеси маркет");
+               // MessageBox.Show("Внеси маркет");
                 tbMarket.Enabled = true;
                 tbMarket.Focus();
             } else {
@@ -509,7 +510,7 @@ namespace Stores_db_task
         private void dataGridTest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex >= 0) {
-                
+
                 try {
                     int rowIndex = e.RowIndex;
                     int marketId = Convert.ToInt32(tbMarket.Text);
@@ -643,10 +644,15 @@ namespace Stores_db_task
             tbPopust.Enabled = true;
             tbPopust.Text = "0";
             discount = 0;
+            
         }
 
 
-
+        private void izvestajToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Izvestaj izvestajForm = new Izvestaj();
+            izvestajForm.Show();
+        }
     }
 }
 

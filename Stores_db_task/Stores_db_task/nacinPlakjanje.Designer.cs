@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbDisplayPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.dataGridPlakjanje = new System.Windows.Forms.DataGridView();
+            this.vidnaplataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iznos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nacinNaplataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lastTryDataSet = new Stores_db_task.lastTryDataSet();
             this.nacin_NaplataTableAdapter = new Stores_db_task.lastTryDataSetTableAdapters.Nacin_NaplataTableAdapter();
-            this.vidnaplataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iznos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPlakjanje)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nacinNaplataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lastTryDataSet)).BeginInit();
@@ -93,6 +93,7 @@
             // dataGridPlakjanje
             // 
             this.dataGridPlakjanje.AutoGenerateColumns = false;
+            this.dataGridPlakjanje.BackgroundColor = System.Drawing.Color.Snow;
             this.dataGridPlakjanje.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridPlakjanje.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridPlakjanje.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -109,6 +110,29 @@
             this.dataGridPlakjanje.TabIndex = 22;
             this.dataGridPlakjanje.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPlakjanje_CellValueChanged);
             // 
+            // vidnaplataDataGridViewTextBoxColumn
+            // 
+            this.vidnaplataDataGridViewTextBoxColumn.DataPropertyName = "vid_naplata";
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vidnaplataDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.vidnaplataDataGridViewTextBoxColumn.HeaderText = "НАЧИН НА ПЛАЌАЊЕ";
+            this.vidnaplataDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.vidnaplataDataGridViewTextBoxColumn.Name = "vidnaplataDataGridViewTextBoxColumn";
+            this.vidnaplataDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // iznos
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.iznos.DefaultCellStyle = dataGridViewCellStyle2;
+            this.iznos.HeaderText = "ИЗНОС";
+            this.iznos.MinimumWidth = 6;
+            this.iznos.Name = "iznos";
+            this.iznos.Width = 125;
+            // 
             // nacinNaplataBindingSource
             // 
             this.nacinNaplataBindingSource.DataMember = "Nacin_Naplata";
@@ -122,29 +146,6 @@
             // nacin_NaplataTableAdapter
             // 
             this.nacin_NaplataTableAdapter.ClearBeforeFill = true;
-            // 
-            // vidnaplataDataGridViewTextBoxColumn
-            // 
-            this.vidnaplataDataGridViewTextBoxColumn.DataPropertyName = "vid_naplata";
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vidnaplataDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.vidnaplataDataGridViewTextBoxColumn.HeaderText = "НАЧИН НА ПЛАЌАЊЕ";
-            this.vidnaplataDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.vidnaplataDataGridViewTextBoxColumn.Name = "vidnaplataDataGridViewTextBoxColumn";
-            this.vidnaplataDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // iznos
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.iznos.DefaultCellStyle = dataGridViewCellStyle4;
-            this.iznos.HeaderText = "ИЗНОС";
-            this.iznos.MinimumWidth = 6;
-            this.iznos.Name = "iznos";
-            this.iznos.Width = 125;
             // 
             // nacinPlakjanje
             // 

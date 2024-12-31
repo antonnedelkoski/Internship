@@ -67,6 +67,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Izvestaj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Izvestaj.Designer.cs">
+      <DependentUpon>Izvestaj.cs</DependentUpon>
+    </Compile>
     <Compile Include="lastTryDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Izvestaj.resx">
+      <DependentUpon>Izvestaj.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="nacinPlakjanje.resx">
       <DependentUpon>nacinPlakjanje.cs</DependentUpon>

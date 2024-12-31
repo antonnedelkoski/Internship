@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.datumTextBox = new System.Windows.Forms.TextBox();
             this.kasierTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +42,11 @@
             this.tbPrice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridTest = new System.Windows.Forms.DataGridView();
+            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbMarket = new System.Windows.Forms.TextBox();
@@ -49,12 +55,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbPopust = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.shifra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kolicina = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.popust = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.izvestajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tableAdapterManager1 = new Stores_db_task.lastTryDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTest)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // datumTextBox
@@ -118,6 +124,49 @@
             this.dataGridTest.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTest_RowEnter);
             this.dataGridTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridTest_KeyPress);
             // 
+            // shifra
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.shifra.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.shifra, "shifra");
+            this.shifra.Name = "shifra";
+            // 
+            // articleName
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.articleName.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.articleName, "articleName");
+            this.articleName.Name = "articleName";
+            // 
+            // kolicina
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.kolicina.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.kolicina, "kolicina");
+            this.kolicina.Name = "kolicina";
+            // 
+            // popust
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Italic);
+            this.popust.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.popust, "popust");
+            this.popust.Name = "popust";
+            // 
+            // price
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
+            this.price.DefaultCellStyle = dataGridViewCellStyle5;
+            resources.ApplyResources(this.price, "price");
+            this.price.Name = "price";
+            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.Lime;
@@ -175,48 +224,32 @@
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Name = "label6";
             // 
-            // shifra
+            // menuStrip1
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
-            this.shifra.DefaultCellStyle = dataGridViewCellStyle16;
-            resources.ApplyResources(this.shifra, "shifra");
-            this.shifra.Name = "shifra";
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.izvestajToolStripMenuItem});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.Name = "menuStrip1";
             // 
-            // articleName
+            // izvestajToolStripMenuItem
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
-            this.articleName.DefaultCellStyle = dataGridViewCellStyle17;
-            resources.ApplyResources(this.articleName, "articleName");
-            this.articleName.Name = "articleName";
+            this.izvestajToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.izvestajToolStripMenuItem.Name = "izvestajToolStripMenuItem";
+            resources.ApplyResources(this.izvestajToolStripMenuItem, "izvestajToolStripMenuItem");
+            this.izvestajToolStripMenuItem.Click += new System.EventHandler(this.izvestajToolStripMenuItem_Click);
             // 
-            // kolicina
+            // contextMenuStrip1
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
-            this.kolicina.DefaultCellStyle = dataGridViewCellStyle18;
-            resources.ApplyResources(this.kolicina, "kolicina");
-            this.kolicina.Name = "kolicina";
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
-            // popust
+            // tableAdapterManager1
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Italic);
-            this.popust.DefaultCellStyle = dataGridViewCellStyle19;
-            resources.ApplyResources(this.popust, "popust");
-            this.popust.Name = "popust";
-            // 
-            // price
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("MS Reference Sans Serif", 13.8F);
-            this.price.DefaultCellStyle = dataGridViewCellStyle20;
-            resources.ApplyResources(this.price, "price");
-            this.price.Name = "price";
+            this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager1.Connection = null;
+            this.tableAdapterManager1.UpdateOrder = Stores_db_task.lastTryDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // Form1
             // 
@@ -238,10 +271,14 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.kasierTextBox);
             this.Controls.Add(this.datumTextBox);
+            this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTest)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +306,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kolicina;
         private System.Windows.Forms.DataGridViewTextBoxColumn popust;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem izvestajToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private lastTryDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
     }
 }
 
